@@ -15,6 +15,13 @@
 
 # Ignore secrets keys
 config/secrets.yml
+config/database.yml
+config/deploy*
+config/brakeman.yml
+
+public/brakeman.html
+
+Capfile
 
 # Ignore Byebug command history file.
 .byebug_history

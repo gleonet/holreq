@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Holreq</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title><%= content_for?(:title) ? "HolReq - " + yield(:title) : "HolReq" %></title>
+
+    <%= stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="title-bar">
+        <div class="title-bar-left">
+          <button class="menu-icon" type="button" data-toggle="menu"></button>
+          <div class="title-bar-title"><a href='/'>HolReq</a></div>
+        </div>
+      </div>
+      <div class="top-bar hide" id="menu" data-toggler=".hide">
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Calendar</a></li>
+            <li><a href="#">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+    <div class='expanded row'>
+      <% if content_for?(:left) -%>
+        <div class='large-9 columns'>
+          <%= yield %>
+        </div>
+        <div class='large-3 columns'>
+          <%= yield(:left) %>
+        </div>
+      <% else -%>
+        <div class='large-12 columns'>
+          <%= yield %>
+        </div>
+      <% end -%>
+    </div>
+    </main>
+
   </body>
 </html>

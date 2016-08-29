@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # use Foundation as CSS Framework
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

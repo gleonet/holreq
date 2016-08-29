@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :title do -%>
+  Sites
+<% end -%>
+
+<% content_for :left do -%>
+  <fieldset class="fieldset">
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sites</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sites.each do |site| %>
+      <tr>
+        <td><%= site.name %></td>
+        <td class='action'>
+          <%= link_to '', site, class: 'fi-info', title: 'Info' %>
+        </td>
+        <td class='action'>
+          <%= link_to '', edit_site_path(site), class: 'fi-pencil', title: 'Edit' %>
+        </td>
+        <td class='action'>
+          <%= link_to '', site, method: :delete,
+                                data: { confirm: 'Are you sure?' },
+                                class: 'fi-trash', title: 'Delete' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Site', new_site_path, class: 'small button primary' %>

@@ -16,15 +16,15 @@
       <div class="title-bar">
         <div class="title-bar-left">
           <button class="menu-icon" type="button" data-toggle="menu"></button>
-          <div class="title-bar-title"><a href='/'>HolReq</a></div>
+          <div class="title-bar-title"><strong data-toggle="menu">HolReq</strong></div>
         </div>
       </div>
       <div class="top-bar hide" id="menu" data-toggler=".hide">
         <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Calendar</a></li>
-            <li><a href="#">Admin</a></li>
+            <li><a href="#"><i class='fi-home'></i> Home</a></li>
+            <li><a href="#"><i class='fi-calendar'></i> Calendar</a></li>
+            <li><a href="#"><i class='fi-widget'></i> Admin</a></li>
           </ul>
         </div>
       </div>
@@ -32,16 +32,27 @@
 
     <main>
     <div class='expanded row'>
-      <% if content_for?(:left) -%>
+      <% if !flash.empty? -%>
+        <% flash.each do |type, message| -%>
+          <div class="<%= type %> callout">
+            <p><%= message %></p>
+          </div>
+        <% end -%>
+      <% end -%>
+      <% if content_for?(:right) -%>
         <div class='large-9 columns'>
-          <%= yield %>
+          <fieldset class='fieldset'>
+            <%= yield %>
+          </fieldset>
         </div>
-        <div class='large-3 columns'>
-          <%= yield(:left) %>
+        <div class='large-3 columns' id='right-column'>
+          <%= yield(:right) %>
         </div>
       <% else -%>
         <div class='large-12 columns'>
-          <%= yield %>
+          <fieldset class='fieldset'>
+            <%= yield %>
+          </fieldset>
         </div>
       <% end -%>
     </div>

@@ -1,19 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<% content_for :title do -%>
-  Sites
-<% end -%>
-
-<% content_for :left do -%>
-  <fieldset class="fieldset">
-    <legend>Summary</legend>
-  </fieldset>
-<% end -%>
-
+<legend>Sites</legend>
 <table>
   <thead>
     <tr>
-      <th>Sites</th>
+      <th>Name</th>
       <th colspan="3">Actions</th>
     </tr>
   </thead>
@@ -30,14 +19,26 @@
         </td>
         <td class='action'>
           <%= link_to '', site, method: :delete,
-                                data: { confirm: 'Are you sure?' },
-                                class: 'fi-trash', title: 'Delete' %>
-        </td>
+            data: { confirm: 'Are you sure?' },
+            class: 'fi-trash', title: 'Delete' %>
+      </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<div class='small button-group'>
+  <%= link_to 'New Site', new_site_path, class: 'small button primary' %>
+</div>
 
-<%= link_to 'New Site', new_site_path, class: 'small button primary' %>
+
+<!-- extra-content -->
+<% content_for :title do -%>
+  Sites
+<% end -%>
+
+<% content_for :right do -%>
+  <fieldset class="fieldset">
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>

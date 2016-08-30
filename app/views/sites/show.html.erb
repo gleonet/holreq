@@ -1,9 +1,27 @@
-<p id="notice"><%= notice %></p>
+<legend>Site: <%= @site.name %></legend>
 
-<p>
-  <strong>Name:</strong>
-  <%= @site.name %>
-</p>
+<dl>
+  <dt>Name: </dt>
+  <dd><%= @site.name %></dd>
+</dl>
 
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>
+<div class="small button-group">
+  <%= link_to edit_site_path(@site), class: 'button' do -%> 
+    <i class='fi-pencil'></i> Edit
+  <% end -%>
+  <%= link_to sites_path, class: 'button' do -%>
+    <i class='fi-arrow-left'></i> Back
+  <% end -%>
+</div>
+
+
+<!-- extra-content -->
+<% content_for :title do -%>
+  Site: <%= @site.name %>
+<% end -%>
+
+<% content_for :right do -%>
+  <fieldset class="fieldset">
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>

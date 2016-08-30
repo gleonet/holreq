@@ -26,25 +26,25 @@
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-//@include foundation-flex-video;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;
 @include foundation-menu-icon;
 @include foundation-off-canvas;
 @include foundation-orbit;
-//@include foundation-pagination;
 @include foundation-progress-bar;
-//@include foundation-slider;
-//@include foundation-sticky;
 @include foundation-reveal;
-//@include foundation-switch;
 @include foundation-table;
 @include foundation-tabs;
-//@include foundation-thumbnail;
 @include foundation-title-bar;
 @include foundation-tooltip;
 @include foundation-top-bar;
+//@include foundation-flex-video;
+//@include foundation-pagination;
+//@include foundation-slider;
+//@include foundation-sticky;
+//@include foundation-switch;
+//@include foundation-thumbnail;
 
 // Icons
 @import "foundation-icons";
@@ -55,21 +55,29 @@
 // @include motion-ui-animations;
 
 body {
-  padding: 0px !important;
-  margin: 0px !important;
+  padding: rem-calc(0)!important;
+  margin: rem-calc(0) !important;
 }
 
 main {
-  margin: 0px 30px 20px 30px;
+  margin: rem-calc(20 30 20 30);
+}
+
+.callout.notice {
+  @extend .callout.primary
 }
 
 .title-bar {
   background-color: map-get($foundation-palette, primary);
 }
 
-.title-bar-title a {
-  font-size: 150%;
+.title-bar-title {
+  font-size: rem-calc(24);
   color: white !important;
+}
+
+li[role=menuitem] {
+  font-size: rem-calc(18);
 }
 
 li[role=menuitem] a:hover {
@@ -77,21 +85,42 @@ li[role=menuitem] a:hover {
 }
 
 .fi-list {
-  font-size: 150%;
+  font-size: rem-calc(18);
+}
+
+legend {
+  font-size: rem-calc(18);
 }
 
 td.action {
-  font-size: 120%;
-  width: 40px;
-  max-width: 40px;
+  font-size: rem-calc(18);
+  width: rem-calc(40);
+  max-width: rem-calc(40);
 }
 
 td.action > a, td.action > a:visited {
-  padding: 5px;
+  padding: rem-calc(5);
   color: black;
 }
 
 td.action > a:hover {
   color: white;
   background-color: map-get($foundation-palette, primary);
+}
+
+.button-group a.button, .button-group a.button:visited {
+  color: white;
+}
+
+a.button {
+  line-height: rem-calc(16);
+  font-size: rem-calc(16);
+  padding: rem-calc(5 12 5 12);
+}
+
+input[type=submit].button {
+  @extend .button.small;
+  line-height: rem-calc(16);
+  font-size: rem-calc(16);
+  padding: rem-calc(5 12 5 12);
 }

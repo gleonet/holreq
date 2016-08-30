@@ -67,6 +67,10 @@ main {
   @extend .callout.primary
 }
 
+.callout.alert ul {
+  margin-top: rem-calc(5);
+}
+
 .title-bar {
   background-color: map-get($foundation-palette, primary);
 }
@@ -123,4 +127,9 @@ input[type=submit].button {
   line-height: rem-calc(16);
   font-size: rem-calc(16);
   padding: rem-calc(5 12 5 12);
+}
+
+.field_with_errors {
+  @extend .medium-12;
+  background-color: #fce6e2 !important;
 }

@@ -1,7 +1,7 @@
 <%= form_for(site) do |f| %>
   <% if site.errors.any? %>
-    <div id="error_explanation" class='medium-6 columns'>
-      <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
+    <div class="alert callout">
+      <h5><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h5>
 
       <ul>
         <% site.errors.full_messages.each do |message| %>
@@ -20,8 +20,8 @@
     <%= f.submit class: 'primary small button' do %>
       <i class='fi-save'></i> Save
     <% end -%>
-    <% if !@site.new_record? -%>
-      <%= link_to @site, class: 'secondary button' do -%>
+    <% if !site.new_record? -%>
+      <%= link_to site, class: 'secondary button' do -%>
         <i class='fi-eye'></i> Show
       <% end -%>
     <% end -%>

@@ -1,0 +1,38 @@
+
+<legend>Users</legend>
+
+<table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Login</th>
+      <th>Email</th>
+      <th>External</th>
+      <th>Site</th>
+      <th>Manager</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.login %></td>
+        <td><%= user.email %></td>
+        <td><%= user.external_id %></td>
+        <td><%= user.site.nil? ? '' : user.site.name %></td>
+        <td><%= user.manager.nil? ? '' : user.manager.fullname %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path, class: 'small button' %>

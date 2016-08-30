@@ -20,7 +20,7 @@ class SitesControllerTest < ActionDispatch::IntegrationTest
       post sites_url, params: { site: { name: @site.name + Time::now.strftime("%H%M%S")} }
     end
 
-    assert_redirected_to site_url(Site.last)
+    assert_redirected_to sites_url
   end
 
   test "should show site" do

@@ -1,0 +1,73 @@
+<%= form_for(user) do |f| %>
+  <% if user.errors.any? -%>
+    <div class='alert callout'>
+      <h5><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h5>
+      <ul>
+        <% user.errors.full_messages.each do |message| -%>
+          <li><%= message %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end -%>
+
+  <div class="field">
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :login %>
+    <%= f.text_field :login %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :external_id, label: 'External ID' %>
+    <%= f.text_field :external_id %>
+  </div>
+
+  <div class="field <%= class_if_error(user, :site) %>">
+    <%= f.label :site %>
+    <%= f.collection_select :site_id, Site.all, :id, :name, 
+        include_blank: true %>
+  </div>
+
+  <div class="field <%= class_if_error(user, :manager) %>">
+    <%= f.label :manager %>
+    <%= f.collection_select :manager_id, User.all, :id, :fullname,
+        include_blank: true %>
+  </div>
+
+  <div class="button-group">
+    <%= f.submit class: 'primary small button' do -%>
+      <i class='fi-save'></i> Save
+    <% end -%>
+    <% if !user.new_record? -%>
+      <%= link_to user, class: 'secondary button' do -%>
+        <i class='fi-eye'></i> Show
+      <% end -%>
+    <% end -%>
+    <%= link_to users_path, class: 'secondary button' do -%>
+      <i class='fi-arrow-left'></i> Back
+    <% end -%>
+  </div>
+<% end %>

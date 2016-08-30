@@ -1,0 +1,11 @@
+<legend>New User</legend>
+
+<div class='row'>
+  <div class='medium-4 columns'>
+    <%= render 'form', user: @user %>
+  </div>
+</div>
+
+<% content_for :title do -%>
+  User
+<% end -%>

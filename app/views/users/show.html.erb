@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @user.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @user.lastname %>
+</p>
+
+<p>
+  <strong>Login:</strong>
+  <%= @user.login %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>External:</strong>
+  <%= @user.external_id %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @user.site.nil? ? '' : @user.site.name %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @user.manager.nil? ? '' : @user.manager.fullname %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_role, except: [:login, :logout, :signin]
 
   # GET /users
   # GET /users.json
@@ -54,11 +55,41 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    @user.enabled = false
+    @user.save
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was successfully disabled.' }
       format.json { head :no_content }
     end
+  end
+
+  # GET /users/login
+  def login
+    @user = User.new
+  end
+
+  # POST /users/signin
+  def signin
+    @user = User.where('login = ?', user_params[:login]).first
+    respond_to do |format|
+      if !@user.nil? and @user.authenticate(user_params[:password]) != false
+        flash[:notice] = "Hi #{@user.name}"
+        session[:authentified] = true
+        session[:last_updated_at] = Time::now
+        session[:user_id] = @user.id
+        format.html { redirect_to users_url }
+      else
+        @user = User.new
+        flash[:alert] = "Login or Password incorrect"
+        format.html { render :login }
+      end
+    end
+  end
+
+  # GET /users/logout
+  def logout
+    reset_session
+    redirect_to login_path
   end
 
   private
@@ -71,6 +102,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:firstname, :lastname, :login, :password,
                                    :password_confirmation, :email, :external_id,
-                                   :site_id, :manager_id)
+                                   :site_id, :manager_id, :role)
     end
 end

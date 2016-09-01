@@ -2,7 +2,6 @@
   <% if site.errors.any? %>
     <div class="alert callout">
       <h5><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h5>
-
       <ul>
         <% site.errors.full_messages.each do |message| %>
           <li><%= message %></li>

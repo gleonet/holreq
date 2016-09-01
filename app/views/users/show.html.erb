@@ -1,39 +1,39 @@
-<p id="notice"><%= notice %></p>
+<legend>User: <%= @user.name %></legend>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @user.firstname %>
-</p>
+<dl>
+  <dt>Firstname:</dt>
+  <dd><%= @user.firstname %></dd>
+  <dt>Lastname:</dt>
+  <dd><%= @user.lastname %></dd>
+  <dt>Login:</dt>
+  <dd><%= @user.login %></dd>
+  <dt>Email:</dt>
+  <dd><%= @user.email %></dd>
+  <dt>External:</dt>
+  <dd><%= @user.external_id %></dd>
+  <dt>Site:</dt>
+  <dd><%= @user.site.nil? ? '' : @user.site.name %></dd>
+  <dt>Manager:</dt>
+  <dd><%= @user.manager.nil? ? '' : @user.manager.fullname %></dd>
+</dl>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @user.lastname %>
-</p>
+<div class="small button-group">
+  <%= link_to edit_user_path(@user), class: 'button' do -%>
+    <i class='fi-pencil'></i> Edit
+  <% end -%>
+  <%= link_to users_path, class: 'button' do -%>
+    <i class='fi-arrow-left'></i> Back
+  <% end -%>
+</div>
 
-<p>
-  <strong>Login:</strong>
-  <%= @user.login %>
-</p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<!-- extra-content -->
+<% content_for :title do -%>
+  User: <%= @user.name %>
+<% end -%>
 
-<p>
-  <strong>External:</strong>
-  <%= @user.external_id %>
-</p>
-
-<p>
-  <strong>Site:</strong>
-  <%= @user.site.nil? ? '' : @user.site.name %>
-</p>
-
-<p>
-  <strong>Manager:</strong>
-  <%= @user.manager.nil? ? '' : @user.manager.fullname %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% content_for :right do -%>
+  <fieldset class="fieldset">
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>

@@ -45,9 +45,14 @@
     <%= f.text_field :external_id %>
   </div>
 
+  <div class="field">
+    <%= f.label :role %>
+    <%= f.select :role, User::ROLES %>
+  </div>
+
   <div class="field <%= class_if_error(user, :site) %>">
     <%= f.label :site %>
-    <%= f.collection_select :site_id, Site.all, :id, :name, 
+    <%= f.collection_select :site_id, Site.all, :id, :name,
         include_blank: true %>
   </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830165012) do
+ActiveRecord::Schema.define(version: 20160901160625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,21 +23,23 @@ ActiveRecord::Schema.define(version: 20160830165012) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "firstname",                      null: false
-    t.string   "lastname",                       null: false
-    t.string   "login",                          null: false
+    t.string   "firstname",                            null: false
+    t.string   "lastname",                             null: false
+    t.string   "login",                                null: false
     t.string   "password_digest"
-    t.string   "email",                          null: false
+    t.string   "email",                                null: false
     t.string   "external_id"
     t.integer  "site_id"
     t.integer  "manager_id"
     t.boolean  "enabled",         default: true
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "role",            default: "employee"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["external_id"], name: "index_users_on_external_id", unique: true, using: :btree
     t.index ["login"], name: "index_users_on_login", unique: true, using: :btree
     t.index ["manager_id"], name: "index_users_on_manager_id", using: :btree
+    t.index ["role"], name: "index_users_on_role", using: :btree
     t.index ["site_id"], name: "index_users_on_site_id", using: :btree
   end
 

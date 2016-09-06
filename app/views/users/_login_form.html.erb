@@ -1,0 +1,12 @@
+<div class='row'>
+  <div class='medium-4 columns'>
+    <%= form_for @user, url: signin_path do |f| %>
+      <%= f.label :login %>
+      <%= f.text_field :login %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit 'Sign In', class: 'primary button' %>
+    <% end -%>
+  </div>
+</div>

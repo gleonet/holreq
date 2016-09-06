@@ -1,0 +1,2 @@
+module LegalDaysHelper
+end

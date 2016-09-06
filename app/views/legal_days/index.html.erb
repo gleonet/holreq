@@ -1,0 +1,33 @@
+<legend>Bank Holidays</legend>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Site</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @legal_days.each do |legal_day| %>
+      <tr>
+        <td><%= legal_day.year %></td>
+        <td><%= legal_day.start_date.to_s(:short_date) %></td>
+        <td><%= legal_day.name %></td>
+        <td><%= legal_day.site.nil? ? '' : legal_day.site.name %></td>
+        <td class='action'><%= link_to '', legal_day, class: 'fi-info', title: 'Info' %></td>
+        <td class='action'><%= link_to '', edit_legal_day_path(legal_day), class: 'fi-pencil', title: 'Edit'%></td>
+        <td class='action'><%= link_to '', legal_day, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class='small button-group'>
+  <%= link_to 'New Bank Holiday', new_legal_day_path, class: 'button' %>
+</div>

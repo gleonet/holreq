@@ -1,0 +1,1 @@
+json.array! @legal_days, partial: 'legal_days/legal_day', as: :legal_day

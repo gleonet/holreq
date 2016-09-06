@@ -1,0 +1,52 @@
+<%= form_for(legal_day) do |f| %>
+  <% if legal_day.errors.any? %>
+    <div class="alert callout">
+      <h5><%= pluralize(legal_day.errors.count, "error") %> prohibited this legal_day from being saved:</h5>
+      <ul>
+      <% legal_day.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :year %>
+
+  <div class="field <%= class_if_error(legal_day, :start_date) %>">
+    <%= f.label :date %>
+    <%= f.text_field :start_date, class: 'datepicker' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field <%= class_if_error(legal_day, :site) %>">
+    <%= f.label :site %>
+    <%= f.collection_select :site_id, Site.all.order(:name), :id, :name, include_blank: true %>
+  </div>
+
+  <div class="button-group">
+    <%= f.submit class: 'primary small button' do -%>
+      <i class='fi-save'></i> Save
+    <% end -%>
+    <% if !legal_day.new_record? -%>
+      <%= link_to legal_day, class: 'secondary button' do -%>
+        <i class='fi-eye'></i> Show
+      <% end -%>
+    <% end -%>
+    <%= link_to legal_days_path, class: 'secondary button' do -%>
+      <i class='fi-arrow-left'></i> Back
+    <% end -%>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(function() {
+  $('.datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
+    minDate: 0,
+  });
+});
+</script>

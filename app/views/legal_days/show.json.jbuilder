@@ -1,0 +1,1 @@
+json.partial! "legal_days/legal_day", legal_day: @legal_day

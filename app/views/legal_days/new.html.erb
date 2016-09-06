@@ -1,0 +1,11 @@
+<legend>New Bank Holiday</legend>
+
+<div class='row'>
+  <div class='medium-4 columns'>
+    <%= render 'form', legal_day: @legal_day %>
+  </div>
+</div>
+
+<% content_for :title do -%>
+  Bank holidays
+<% end -%>

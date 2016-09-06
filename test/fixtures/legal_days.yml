@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: 2016
+  start_date: 2016-01-01
+  name: MyString
+  site: sites(:one)
+
+two:
+  year: 2016
+  start_date: 2016-12-25
+  name: MyString2
+  site: sites(:one)

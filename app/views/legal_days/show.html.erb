@@ -1,0 +1,32 @@
+<legend>Bank Holiday : <%= @legal_day.name %></legend>
+
+<dl>
+  <dt>Year:</dt>
+  <dd><%= @legal_day.year %></dd>
+  <dt>Date:</dt>
+  <dd><%= @legal_day.start_date.nil? ? '' : @legal_day.start_date.to_s(:short_date) %></dd>
+  <dt>Name:</dt>
+  <dd><%= @legal_day.name %></dd>
+  <dt>Site:</dt>
+  <dd><%= @legal_day.site.nil? ? '' : @legal_day.site.name %></dd>
+</dl>
+
+<div class='small button-group'>
+  <%= link_to edit_legal_day_path(@legal_day), class: 'button' do -%>
+    <i class='fi-pencil'></i> Edit
+  <% end -%>
+  <%= link_to legal_days_path, class: 'button' do -%>
+    <i class='fi-arrow-left'></i> Back
+  <% end -%>
+</div>
+
+<!-- extra-content -->
+<% content_for :title do -%>
+  Bank Holiday: <%= @legal_day.name %>
+<% end -%>
+
+<% content_for :right do -%>
+  <fieldset class='fieldset'>
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>

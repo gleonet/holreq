@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901160625) do
+ActiveRecord::Schema.define(version: 20160901165048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "legal_days", force: :cascade do |t|
+    t.integer  "year"
+    t.datetime "start_date"
+    t.string   "name"
+    t.integer  "site_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["site_id"], name: "index_legal_days_on_site_id", using: :btree
+    t.index ["year"], name: "index_legal_days_on_year", using: :btree
+  end
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160901160625) do
     t.index ["site_id"], name: "index_users_on_site_id", using: :btree
   end
 
+  add_foreign_key "legal_days", "sites"
   add_foreign_key "users", "sites"
   add_foreign_key "users", "users", column: "manager_id"
 end

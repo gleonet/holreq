@@ -9,6 +9,8 @@ one:
   external_id: MyString
   site: sites(:one)
   manager: users(:one)
+  enabled: true
+  role: admin
 
 two:
   firstname: MyString2
@@ -19,3 +21,5 @@ two:
   external_id: MyString2
   site_id: sites(:one)
   manager: users(:one)
+  enabled: true
+  role: admin

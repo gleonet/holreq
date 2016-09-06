@@ -34,6 +34,11 @@ class User < ApplicationRecord
     self.role == 'admin'
   end
 
+  # Test user enabled
+  def enabled?
+    self.enabled
+  end
+
   private
   def capitalize
     self.lastname.capitalize

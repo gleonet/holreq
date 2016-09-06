@@ -3,6 +3,8 @@ require 'test_helper'
 class SitesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @site = sites(:one)
+    @user = users(:one)
+    post signin_url, params: { user: { login: @user.login, password: 'secret' } }
   end
 
   test "should get index" do

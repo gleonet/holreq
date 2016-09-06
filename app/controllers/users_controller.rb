@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 
   # POST /users/signin
   def signin
-    @user = User.where('login = ?', user_params[:login]).first
+    @user = User.where("enabled = 't' and login = ?", user_params[:login]).first
     respond_to do |format|
       if !@user.nil? and @user.authenticate(user_params[:password]) != false
         flash[:notice] = "Hi #{@user.name}"
@@ -102,6 +102,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:firstname, :lastname, :login, :password,
                                    :password_confirmation, :email, :external_id,
-                                   :site_id, :manager_id, :role)
+                                   :site_id, :manager_id, :enabled, :role)
     end
 end

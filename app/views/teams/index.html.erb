@@ -1,0 +1,39 @@
+<legend>Teams</legend>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Manager</th>
+      <th>External ID</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.manager.fullname %></td>
+        <td><%= team.external_id %></td>
+        <td class="action"><%= link_to '', team, class: 'fi-eye', title: 'Info' %></td>
+        <td class="action"><%= link_to '', edit_team_path(team), class: 'fi-pencil', title: 'Edit' %></td>
+        <td class="action"><%= link_to '', team, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team', new_team_path, class: 'button' %>
+
+<% content_for :title do -%>
+  Teams
+<% end -%>
+
+<% content_for :right do -%>
+  <fieldset class="fieldset">
+    <legend>Summary</legend>
+  </fieldset>
+<% end -%>

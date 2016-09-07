@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   validates :login, :firstname, :lastname, :email, presence: true
   validates :login, :email, uniqueness: true
-  validates :manager_id, presence: false
 
   before_save :capitalize
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :teams
   resources :legal_days
   resources :users do
     collection do

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  manager_id: users(:one).id
+  name: Team1
+  external_id: MyString
+
+two:
+  user: users(:two).id
+  name: Team2
+  external_id: MyString

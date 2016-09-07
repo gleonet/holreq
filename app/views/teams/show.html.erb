@@ -1,0 +1,19 @@
+<legend>Team <%= @team.name %></legend>
+
+<dl>
+  <dt>Manager:</dt>
+  <dd><%= @team.manager.fullname %></dd>
+  <dt>Name:</dt>
+  <dd><%= @team.name %></dd>
+  <dt>External:</dt>
+  <dd><%= @team.external_id %></dd>
+</dl>
+
+<div class="small button-group">
+  <%= link_to edit_team_path(@team), class: 'button secondary' do %>
+    <i class="fi-pencil"></i> Edit
+  <% end -%>
+  <%= link_to teams_path, class: 'button secondary' do %>
+    <i class="fi-arrow-left"></i> Back
+  <% end -%>
+</div>

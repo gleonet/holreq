@@ -21,8 +21,8 @@ class LegalDaysControllerTest < ActionDispatch::IntegrationTest
 
   test "should create legal_day" do
     assert_difference('LegalDay.count') do
-      post legal_days_url, params: { legal_day: { name: 'Test', 
-                                                  site_id: @site_id, 
+      post legal_days_url, params: { legal_day: { name: 'Test2', 
+                                                  site_id: @site.id, 
                                                   start_date: Time::now.to_s(:short_date), 
                                                   year: 2016 } }
     end
@@ -41,10 +41,10 @@ class LegalDaysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update legal_day" do
-    patch legal_day_url(@legal_day), params: { legal_day: { name: @legal_day.name, 
-                                                            site_id: @legal_day.site_id, 
-                                                            start_date: @legal_day.start_date, 
-                                                            year: @legal_day.year } }
+    patch legal_day_url(@legal_day), params: { legal_day: { name: @legal_day.name.to_s + '3', 
+                                                            site_id: @site.id, 
+                                                            start_date: Time::now.to_s(:short_date), 
+                                                            year: 2016 } }
     assert_redirected_to legal_days_url
   end
 

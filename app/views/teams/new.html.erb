@@ -1,5 +1,11 @@
-<h1>New Team</h1>
+<Legend>New Team</legend>
 
-<%= render 'form', team: @team %>
+<div class='row'>
+  <div class='medium-4 columns'>
+    <%= render 'form', team: @team %>
+  </div>
+</div>
 
-<%= link_to 'Back', teams_path %>
+<% content_for :title do %>
+  New Team
+<% end %>

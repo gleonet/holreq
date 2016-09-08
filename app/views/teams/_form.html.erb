@@ -1,8 +1,7 @@
 <%= form_for(team) do |f| %>
   <% if team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
-
+    <div id="callout alert">
+      <h5><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h5>
       <ul>
       <% team.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,9 +10,10 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field <%= class_if_error(team, :site) %>">
     <%= f.label :manager%>
-    <%= f.collection_select :manager_id, User.where("role = 'manager' or role = 'HR' or role = 'admin'").order(:firstname), :id, :fullname %>
+    <%= f.collection_select :manager_id, User.where("role = 'manager' or role = 'HR' or role = 'admin'").order(:firstname), 
+                            :id, :fullname, include_blank: true %>
   </div>
 
   <div class="field">
@@ -26,7 +26,15 @@
     <%= f.text_field :external_id %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="button-group">
+    <%= f.submit class: 'primary small button' do -%>
+      <i class='fi-save'></i> Save
+    <% end -%>
+    <%= link_to team, class: 'secondary button' do -%>
+      <i class='fi-eye'></i> Show
+    <% end -%>
+    <%= link_to teams_url, class: 'secondary button' do -%>
+      <i class='fi-arrow-left'></i> Back
+    <% end -%>
   </div>
 <% end %>

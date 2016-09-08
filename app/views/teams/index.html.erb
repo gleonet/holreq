@@ -14,7 +14,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><%= team.manager.fullname %></td>
+        <td><%= team.manager.nil? ? '' : team.manager.fullname %></td>
         <td><%= team.external_id %></td>
         <td class="action"><%= link_to '', team, class: 'fi-eye', title: 'Info' %></td>
         <td class="action"><%= link_to '', edit_team_path(team), class: 'fi-pencil', title: 'Edit' %></td>

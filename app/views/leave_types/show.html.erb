@@ -1,0 +1,16 @@
+<legend>Leave Type</legend>
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @leave_type.name %></dd>
+  <dt>Description:</dt>
+  <dd><%= @leave_type.description %></dd>
+</dl>
+
+<div class='button-group small'>
+  <%= link_to edit_leave_type_path(@leave_type), class: 'button secondary' do -%>
+    <i class='fi-pencil'></i> Edit
+  <% end -%>
+  <%= link_to leave_types_path, class: 'button secondary' do -%>
+    <i class='fi-arrow-left'></i> Back
+  <% end -%>
+</div>

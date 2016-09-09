@@ -4,6 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
     @site = sites(:one)
+    @team = teams(:one)
     post signin_url, params: { user: { login: @user.login, password: 'secret' } }
   end
 
@@ -29,7 +30,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                                         site_id: @site.id,
                                         enabled: true,
                                         role: @user.role,
-                                        manager_id: @user.id } }
+                                        team_id: @team.id } }
     end
 
     assert_redirected_to users_url
@@ -56,7 +57,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                                              site_id: @site.id,
                                              enabled: true,
                                              role: @user.role,
-                                             manager_id: @user.id } }
+                                             team_id: @team.id } }
     assert_redirected_to users_url
   end
 

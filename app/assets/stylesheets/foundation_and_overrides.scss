@@ -82,6 +82,10 @@ li[role=menuitem] a:hover {
   background-color: map-get($foundation-palette, primary);
 }
 
+#submenu li a, #submenu li a:visited {
+  color: #333 !important;
+}
+
 .title-bar-right, .title-bar-right a {
   font-size: rem-calc(16);
   color: white !important;
@@ -111,7 +115,7 @@ td.action > a:hover {
   background-color: map-get($foundation-palette, primary);
 }
 
-.button-group a.button, .button-group a.button:visited {
+.button-group a.button, .button-group a.button:visited, a.button:visited {
   color: white;
 }
 

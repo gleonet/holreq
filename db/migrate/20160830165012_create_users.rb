@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
-      t.string :firstname, null: false
+      t.string :firstname
       t.string :lastname, null: false
       t.string :login, null: false
       t.string :password_digest
@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     end
     add_index :users, :login, unique: true
     add_index :users, :email, unique: true
-    add_index :users, :external_id, unique: true
+    add_index :users, :external_id, unique: false
 
     rename_column :users, :user_id, :manager_id
   end

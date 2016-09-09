@@ -11,17 +11,21 @@
     <% @sites.each do |site| %>
       <tr>
         <td><%= site.name %></td>
-        <td class='action'>
-          <%= link_to '', site, class: 'fi-info', title: 'Info' %>
-        </td>
-        <td class='action'>
-          <%= link_to '', edit_site_path(site), class: 'fi-pencil', title: 'Edit' %>
-        </td>
-        <td class='action'>
-          <%= link_to '', site, method: :delete,
-            data: { confirm: 'Are you sure?' },
-            class: 'fi-trash', title: 'Delete' %>
-      </td>
+        <% if site.name != 'admin' -%>
+          <td class='action'>
+            <%= link_to '', site, class: 'fi-info', title: 'Info' %>
+          </td>
+          <td class='action'>
+            <%= link_to '', edit_site_path(site), class: 'fi-pencil', title: 'Edit' %>
+          </td>
+          <td class='action'>
+            <%= link_to '', site, method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'fi-trash', title: 'Delete' %>
+          </td>
+        <% else -%>
+          <td colspan='3'></td>
+        <% end -%>
       </tr>
     <% end %>
   </tbody>

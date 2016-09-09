@@ -1,16 +1,18 @@
 class User < ApplicationRecord
   belongs_to :site
-  belongs_to :manager, class_name: 'User', foreign_key: :manager_id
+  belongs_to :team
 
   has_secure_password
 
-  validates :login, :firstname, :lastname, :email, presence: true
+  validates :login, :lastname, :email, presence: true
   validates :login, :email, uniqueness: true
 
   before_save :capitalize
 
-  User::ROLES = [ User::EMPLOYEE = 'employee', User::MANAGER = 'manager',
-                  User::HR = 'hr', User::ADMIN = 'admin']
+  User::ROLES = [ User::EMPLOYEE = 'employee',
+                  User::MANAGER = 'manager',
+                  User::HR = 'HR',
+                  User::ADMIN = 'admin' ]
 
   def fullname
     self.lastname.to_s + ' ' + self.firstname.to_s
@@ -22,15 +24,15 @@ class User < ApplicationRecord
 
   # Test role
   def manager?
-    self.role == 'manager'
+    self.role == User::MANAGER
   end
 
   def hr?
-    self.role == 'hr'
+    self.role == User::HR
   end
 
   def admin?
-    self.role == 'admin'
+    self.role == User::ADMIN
   end
 
   # Test user enabled

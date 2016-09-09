@@ -56,9 +56,9 @@
         include_blank: true %>
   </div>
 
-  <div class="field <%= class_if_error(user, :manager) %>">
-    <%= f.label :manager %>
-    <%= f.collection_select :manager_id, User.all, :id, :fullname,
+  <div class="field <%= class_if_error(user, :team) %>">
+    <%= f.label :team %>
+    <%= f.collection_select :team_id, Team.all, :id, :name,
         include_blank: true %>
   </div>
 

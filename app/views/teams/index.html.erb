@@ -14,11 +14,15 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><%= team.manager.nil? ? '' : team.manager.fullname %></td>
+        <td><%= team.manager.nil? ? '' : team.manager.name %></td>
         <td><%= team.external_id %></td>
-        <td class="action"><%= link_to '', team, class: 'fi-eye', title: 'Info' %></td>
-        <td class="action"><%= link_to '', edit_team_path(team), class: 'fi-pencil', title: 'Edit' %></td>
-        <td class="action"><%= link_to '', team, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete'%></td>
+        <% if team.name != 'admin' -%>
+          <td class="action"><%= link_to '', team, class: 'fi-eye', title: 'Info' %></td>
+          <td class="action"><%= link_to '', edit_team_path(team), class: 'fi-pencil', title: 'Edit' %></td>
+          <td class="action"><%= link_to '', team, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete'%></td>
+        <% else -%>
+          <td colspan="3"></td>
+        <% end -%>
       </tr>
     <% end %>
   </tbody>

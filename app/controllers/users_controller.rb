@@ -41,6 +41,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    # Force the login for admin account
+    if @user.login == 'admin'
+      user_params[:login] = 'admin'
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }
@@ -102,6 +107,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:firstname, :lastname, :login, :password,
                                    :password_confirmation, :email, :external_id,
-                                   :site_id, :manager_id, :enabled, :role)
+                                   :site_id, :team_id, :enabled, :role)
     end
 end

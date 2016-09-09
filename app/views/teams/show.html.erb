@@ -1,10 +1,10 @@
-<legend>Team <%= @team.name %></legend>
+<legend>Team Information</legend>
 
 <dl>
-  <dt>Manager:</dt>
-  <dd><%= @team.manager.nil? ? '' : @team.manager.fullname %></dd>
   <dt>Name:</dt>
   <dd><%= @team.name %></dd>
+  <dt>Manager:</dt>
+  <dd><%= @team.manager.nil? ? '' : @team.manager.name %></dd>
   <dt>External:</dt>
   <dd><%= @team.external_id %></dd>
 </dl>
@@ -17,3 +17,18 @@
     <i class="fi-arrow-left"></i> Back
   <% end -%>
 </div>
+
+<% content_for :title do -%>
+  Team <%= @team.name %>
+<% end -%>
+
+<% content_for :equal_right do -%>
+  <fieldset class='fieldset'>
+    <legend>Team Members</legend>
+    <ul>
+    <% @team.users.order(:firstname).each do |user| -%>
+      <li><%= user.name %></li>
+    <% end -%>
+    </ul>
+  </fieldset>
+<% end -%>

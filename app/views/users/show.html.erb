@@ -13,8 +13,8 @@
   <dd><%= @user.external_id %></dd>
   <dt>Site:</dt>
   <dd><%= @user.site.nil? ? '' : @user.site.name %></dd>
-  <dt>Manager:</dt>
-  <dd><%= @user.manager.nil? ? '' : @user.manager.fullname %></dd>
+  <dt>Team:</dt>
+  <dd><%= @user.team.nil? ? '' : @user.team.name %></dd>
 </dl>
 
 <div class="small button-group">

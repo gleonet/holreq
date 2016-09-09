@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div class="field <%= class_if_error(team, :site) %>">
+  <div class="field <%= class_if_error(team, :manager_id) %>">
     <%= f.label :manager%>
     <%= f.collection_select :manager_id, User.where("role = 'manager' or role = 'HR' or role = 'admin'").order(:firstname), 
                             :id, :fullname, include_blank: true %>

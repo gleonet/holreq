@@ -1,15 +1,13 @@
 <legend>User: <%= @user.name %></legend>
 
 <dl>
-  <dt>Firstname:</dt>
-  <dd><%= @user.firstname %></dd>
-  <dt>Lastname:</dt>
-  <dd><%= @user.lastname %></dd>
+  <dt>Name:</dt>
+  <dd><%= @user.name %></dd>
   <dt>Login:</dt>
   <dd><%= @user.login %></dd>
   <dt>Email:</dt>
   <dd><%= @user.email %></dd>
-  <dt>External:</dt>
+  <dt>External ID:</dt>
   <dd><%= @user.external_id %></dd>
   <dt>Site:</dt>
   <dd><%= @user.site.nil? ? '' : @user.site.name %></dd>
@@ -34,6 +32,28 @@
 
 <% content_for :right do -%>
   <fieldset class="fieldset">
-    <legend>Summary</legend>
+    <legend>Leaves</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Available</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.leaves.each do |leave| -%>
+          <tr>
+            <td><%= leave.leave_type.nil? ? '' : leave.leave_type.name %></td>
+            <td><%= leave.available %></td>
+            <td><%= leave.nb_hours %></td>
+        <% end -%>
+      </tbody>
+    </table>
+    <% if @session_user.hr? or @session_user.admin? -%>
+      <%= link_to new_leave_path(user_id: @user.id), class: 'button small secondary' do -%>
+        <i class='fi-plus'></i> Add Leave
+      <% end -%>
+    <% end -%>
   </fieldset>
 <% end -%>

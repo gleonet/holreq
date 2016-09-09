@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   belongs_to :site
   belongs_to :team
+  has_many :leaves
 
   has_secure_password
 

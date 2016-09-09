@@ -1,0 +1,43 @@
+<%= form_for(leave) do |f| %>
+  <% if leave.errors.any? %>
+    <div class='callout alert'>
+      <h5><%= pluralize(leave.errors.count, "error") %> prohibited this leave from being saved:</h5>
+      <ul>
+      <% leave.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id %>
+
+  <div class="field">
+    <%= f.label :year %>
+    <%= f.number_field :year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :leave_type %>
+    <%= f.collection_select :leave_type_id, LeaveType.order(:name).all, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nb_hours %>
+    <%= f.number_field :nb_hours %>
+  </div>
+
+  <div class="button-group small">
+    <%= f.submit class: 'button' do -%>
+      <i class='fi-save'></i> Save
+    <% end -%>
+    <% if !leave.new_record? -%>
+      <%= link_to leave_path(leave), class: 'button secondary' do -%>
+        <i class='fi-eye'></i> Show
+      <% end -%>
+    <% end -%>
+    <%= link_to leaves_url, class: 'button secondary' do -%>
+      <i class='fi-arrow-left'></i> Back
+    <% end -%>
+  </div>
+<% end %>

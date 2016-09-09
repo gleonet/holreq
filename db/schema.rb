@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909101610) do
+ActiveRecord::Schema.define(version: 20160909104512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20160909101610) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_leave_types_on_name", unique: true, using: :btree
+  end
+
+  create_table "leaves", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "year"
+    t.integer  "leave_type_id"
+    t.integer  "nb_hours"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["leave_type_id"], name: "index_leaves_on_leave_type_id", using: :btree
+    t.index ["user_id"], name: "index_leaves_on_user_id", using: :btree
   end
 
   create_table "legal_days", force: :cascade do |t|
@@ -72,6 +83,8 @@ ActiveRecord::Schema.define(version: 20160909101610) do
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
+  add_foreign_key "leaves", "leave_types"
+  add_foreign_key "leaves", "users"
   add_foreign_key "legal_days", "sites"
   add_foreign_key "users", "sites"
   add_foreign_key "users", "teams"

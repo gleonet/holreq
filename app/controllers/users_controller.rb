@@ -78,11 +78,11 @@ class UsersController < ApplicationController
     @user = User.where("enabled = 't' and login = ?", user_params[:login]).first
     respond_to do |format|
       if !@user.nil? and @user.authenticate(user_params[:password]) != false
-        flash[:notice] = "Hi #{@user.name}"
+        flash[:notice] = "#{t('welcome')} #{@user.name}"
         session[:authentified] = true
         session[:last_updated_at] = Time::now
         session[:user_id] = @user.id
-        format.html { redirect_to users_url }
+        format.html { redirect_to user_path(@user) }
       else
         @user = User.new
         flash[:alert] = "Login or Password incorrect"

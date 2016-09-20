@@ -54,15 +54,17 @@ class LeavesController < ApplicationController
     end
   end
 
+  # Leaves cannot be deleted.
+  #
   # DELETE /leaves/1
   # DELETE /leaves/1.json
-  def destroy
-    @leave.destroy
-    respond_to do |format|
-      format.html { redirect_to leaves_url, notice: 'Leave was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  #def destroy
+  #  @leave.destroy
+  #  respond_to do |format|
+  #    format.html { redirect_to leaves_url, notice: 'Leave was successfully destroyed.' }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

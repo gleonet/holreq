@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :check_role, except: [:login, :logout, :signin]
 
   # GET /users
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @leave_requests = @user.leave_requests.order(:start_date)
   end
 
   # GET /users/new
@@ -94,7 +95,18 @@ class UsersController < ApplicationController
   # GET /users/logout
   def logout
     reset_session
+    @session_user = nil
     redirect_to login_path
+  end
+
+  # GET /users/calendar
+  def calendar
+    @leave_requests = []
+    @user.leave_requests.where("status != ?", LeaveRequest::REJECTED).order(:start_date).each do |leave_request|
+      leave_request.dates.each do |date|
+        @leave_requests << LeaveRequest::LeaveDate.new(date, leave_request.type_name, leave_request.status)
+      end
+    end
   end
 
   private

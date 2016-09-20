@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: users(:one)
+  leave: leaves(:one)
+  leave_type_id: leave_types(:one)
+  start_date: <%= 2.days.since.to_datetime %>
+  end_date: <%= 3.days.since.to_datetime %>
+  status: submitted
+  approved_by_id: users(:one)
+  nb_hours: 16
+  description: Test
+  range: range_date
+  period: all
+
+two:
+  user: users(:one)
+  leave: leaves(:one)
+  leave_type_id: leave_types(:one)
+  start_date: <%= 2.days.since.to_s(:db) %>
+  end_date: <%= 3.days.since.to_s(:db) %>
+  status: MyString
+  approved_by_id: users(:one)
+  nb_hours: 1
+  description: MyString
+  range: range_date
+  period: all

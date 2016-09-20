@@ -78,8 +78,18 @@ li[role=menuitem] {
   font-size: rem-calc(18);
 }
 
+li[role=menuitem] a:visited {
+  color: #333;
+}
+
 li[role=menuitem] a:hover {
   background-color: map-get($foundation-palette, primary);
+  color: white;
+}
+
+li.is-dropdown-submenu-parent > a::after {
+  color: #333 !important;
+  border-color: #333 transparent transparent !important;
 }
 
 #submenu li a, #submenu li a:visited {
@@ -115,6 +125,10 @@ td.action > a:hover {
   background-color: map-get($foundation-palette, primary);
 }
 
+tbody tr:nth-child(2n) {
+  background-color: #f7fcff;
+}
+
 .button-group a.button, .button-group a.button:visited, a.button:visited {
   color: white;
 }
@@ -134,7 +148,7 @@ input[type=submit].button {
 
 .field_with_errors {
   @extend .medium-12;
-  background-color: #fce6e2 !important;
+  background-color: #fce6e2;
 }
 
 dt {
@@ -146,3 +160,27 @@ dd {
   margin-left: rem-calc(8);
 }
 
+.simple-calendar {
+  .wday-0, .wday-6 {
+    font-style: italic;
+    background-color: #ececec;
+  }
+
+  .today {
+    background-color: transparent !important;
+    font-weight: bold;
+  }
+
+  .prev-month, .next-month {
+    color: silver;
+    background-color: #ececec;
+  }
+
+  .has-events {
+    background-color: #b4f0ca;
+  }
+
+  .day {
+    height: rem-calc(120px) !important;
+  }
+}

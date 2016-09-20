@@ -1,29 +1,46 @@
 <legend>User: <%= @user.name %></legend>
 
-<dl>
-  <dt>Name:</dt>
-  <dd><%= @user.name %></dd>
-  <dt>Login:</dt>
-  <dd><%= @user.login %></dd>
-  <dt>Email:</dt>
-  <dd><%= @user.email %></dd>
-  <dt>External ID:</dt>
-  <dd><%= @user.external_id %></dd>
-  <dt>Site:</dt>
-  <dd><%= @user.site.nil? ? '' : @user.site.name %></dd>
-  <dt>Team:</dt>
-  <dd><%= @user.team.nil? ? '' : @user.team.name %></dd>
-</dl>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Login</th>
+      <th>Email</th>
+      <th>External ID</th>
+      <th>Site</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @user.login %></td>
+      <td><%= @user.email %></td>
+      <td><%= @user.external_id %></td>
+      <td><%= @user.site.nil? ? '' : @user.site.name %></td>
+      <td><%= @user.team.nil? ? '' : @user.team.name %></td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="small button-group">
-  <%= link_to edit_user_path(@user), class: 'button' do -%>
-    <i class='fi-pencil'></i> Edit
-  <% end -%>
-  <%= link_to users_path, class: 'button' do -%>
-    <i class='fi-arrow-left'></i> Back
+<div class="button-group small">
+  <% if @session_user.hr? -%>
+    <%= link_to edit_user_path(@user), class: 'secondary button' do -%>
+      <i class='fi-pencil'></i> Edit User
+    <% end -%>
+    <%= link_to users_path, class: 'secondary button' do -%>
+      <i class='fi-arrow-left'></i> Users list
+    <% end -%>
   <% end -%>
 </div>
 
+<%= render partial: 'leave_requests/list' %>
+
+<div class="button-group small">
+  <%= link_to new_leave_request_path(user_id: @user.id), class: 'button' do -%>
+    <i class='fi-plus'></i> Create a Request
+  <% end -%>
+</div>
 
 <!-- extra-content -->
 <% content_for :title do -%>
@@ -31,29 +48,5 @@
 <% end -%>
 
 <% content_for :right do -%>
-  <fieldset class="fieldset">
-    <legend>Leaves</legend>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Available</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.leaves.each do |leave| -%>
-          <tr>
-            <td><%= leave.leave_type.nil? ? '' : leave.leave_type.name %></td>
-            <td><%= leave.available %></td>
-            <td><%= leave.nb_hours %></td>
-        <% end -%>
-      </tbody>
-    </table>
-    <% if @session_user.hr? or @session_user.admin? -%>
-      <%= link_to new_leave_path(user_id: @user.id), class: 'button small secondary' do -%>
-        <i class='fi-plus'></i> Add Leave
-      <% end -%>
-    <% end -%>
-  </fieldset>
+  <%= render partial: 'users/summary' %>
 <% end -%>

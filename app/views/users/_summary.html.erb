@@ -1,0 +1,29 @@
+<fieldset class="fieldset">
+  <legend>Leaves</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Available</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if !@user.nil? -%>
+        <% @user.leaves.each do |leave| -%>
+          <tr>
+            <td><%= leave.leave_type.nil? ? '' : leave.leave_type.name %></td>
+            <td><%= leave.available %></td>
+            <td><%= leave.nb_hours %></td>
+          <% end -%>
+        <% end -%>
+    </tbody>
+  </table>
+
+  <% if @session_user.hr? or @session_user.admin? -%>
+    <%= link_to new_leave_path(user_id: @user.id), class: 'button secondary small' do -%>
+      <i class='fi-plus'></i> Add Leave
+    <% end -%>
+  <% end -%>
+</fieldset>
+

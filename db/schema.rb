@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909104512) do
+ActiveRecord::Schema.define(version: 20160913105929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "leave_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "leave_id"
+    t.integer  "leave_type_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "status"
+    t.integer  "approved_by_id"
+    t.integer  "nb_hours"
+    t.string   "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "range"
+    t.string   "period"
+    t.index ["leave_id"], name: "index_leave_requests_on_leave_id", using: :btree
+    t.index ["leave_type_id"], name: "index_leave_requests_on_leave_type_id", using: :btree
+    t.index ["user_id"], name: "index_leave_requests_on_user_id", using: :btree
+  end
 
   create_table "leave_types", force: :cascade do |t|
     t.string   "name"
@@ -83,6 +102,9 @@ ActiveRecord::Schema.define(version: 20160909104512) do
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
+  add_foreign_key "leave_requests", "leave_types"
+  add_foreign_key "leave_requests", "leaves"
+  add_foreign_key "leave_requests", "users"
   add_foreign_key "leaves", "leave_types"
   add_foreign_key "leaves", "users"
   add_foreign_key "legal_days", "sites"

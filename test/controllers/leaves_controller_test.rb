@@ -41,11 +41,4 @@ class LeavesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to leave_url(@leave)
   end
 
-  test "should destroy leave" do
-    assert_difference('Leave.count', -1) do
-      delete leave_url(@leave)
-    end
-
-    assert_redirected_to leaves_url
-  end
 end

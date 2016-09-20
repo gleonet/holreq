@@ -1,0 +1,11 @@
+<legend>New Leave Request</legend>
+
+<div class='row'>
+  <div class='medium-4 columns'>
+    <%= render 'form', leave_request: @leave_request %>
+  </div>
+</div>
+
+<% content_for :right do -%>
+  <%= render partial: 'users/summary' %>
+<% end -%>

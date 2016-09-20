@@ -1,0 +1,28 @@
+<legend>Leave Request</legend>
+
+<dl>
+  <dt>User:</dt>
+  <dd><%= @leave_request.user.nil? ? '' : @leave_request.user.name %></dd>
+  <dt>Leave Type:</dt>
+  <dd><%= @leave_request.leave_type.nil? ? '' : @leave_request.leave_type.name %></dd>
+  <dt>Start Date:</dt>
+  <dd><%= @leave_request.start_date %></dd>
+  <dt>End Date:</dt>
+  <dd><%= @leave_request.end_date %></dd>
+  <dt>Status:</dt>
+  <dd><%= @leave_request.status %></dd>
+  <dt>Approved by:</dt>
+  <dd><%= @leave_request.approved_by_id %></dd>
+  <dt>Nb Hours:</dt>
+  <dd><%= @leave_request.nb_hours %></dd>
+  <dt>Description:</dt>
+  <dd><%= @leave_request.description %></dd>
+</dl>
+
+<% if @session_user.hr? or @leave_request.start_date > Time::now -%>
+  <div class='button-group small'>
+    <%= link_to edit_leave_request_path(@leave_request), class: 'button secondary' do %>
+      <i class='fi-pencil'></i> Edit
+    <% end -%>
+  </div>
+<% end -%>

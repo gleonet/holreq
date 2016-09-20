@@ -2,6 +2,7 @@ class User < ApplicationRecord
   belongs_to :site
   belongs_to :team
   has_many :leaves
+  has_many :leave_requests
 
   has_secure_password
 
@@ -25,11 +26,11 @@ class User < ApplicationRecord
 
   # Test role
   def manager?
-    self.role == User::MANAGER
+    self.role == User::MANAGER or self.role == User::HR or self.role == User::ADMIN
   end
 
   def hr?
-    self.role == User::HR
+    self.role == User::HR or self.role == User::ADMIN
   end
 
   def admin?

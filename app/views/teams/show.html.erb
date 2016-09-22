@@ -4,7 +4,7 @@
   <dt>Name:</dt>
   <dd><%= @team.name %></dd>
   <dt>Manager:</dt>
-  <dd><%= @team.manager.nil? ? '' : @team.manager.name %></dd>
+  <dd><%= @team.manager_id? ? @team.manager.name : '' %></dd>
   <dt>External:</dt>
   <dd><%= @team.external_id %></dd>
 </dl>

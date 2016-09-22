@@ -33,11 +33,13 @@
                   <i class='fi-calendar'></i> My Calendar
                 <% end -%>
               </li>
-              <li>
-                <%= link_to calendar_team_path(@session_user.team) do %>
-                  <i class='fi-calendar'></i> Team Calendar
-                <% end -%>
-              </li>
+              <% if @session_user.team_id? -%>
+                <li>
+                  <%= link_to calendar_team_path(@session_user.team) do %>
+                    <i class='fi-calendar'></i> Team Calendar
+                  <% end -%>
+                </li>
+              <% end -%>
               <li>
                 <a href="#"><i class='fi-widget'></i> Admin</a>
                 <ul id="submenu" class="dropdown menu" data-dropdown-menu>

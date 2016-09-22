@@ -7,8 +7,8 @@ one:
   password_digest: <%= BCrypt::Password.create('secret') %>
   email: MyString
   external_id: MyString
-  site: sites(:one)
-  team: teams(:one)
+  site_id: sites(:one).id
+  team_id: teams(:one).id
   enabled: true
   role: admin
 
@@ -19,7 +19,7 @@ two:
   password_digest: <%= BCrypt::Password.create('secret') %>
   email: MyString2
   external_id: MyString2
-  site_id: sites(:one)
-  team: teams(:one)
+  site_id: sites(:one).id
+  team_id: teams(:one).id
   enabled: true
   role: admin

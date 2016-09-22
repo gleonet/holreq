@@ -15,11 +15,11 @@
   <tbody>
     <% @leave_requests.each do |leave_request| %>
       <tr>
-        <td><%= leave_request.leave_type.nil? ? '' : leave_request.leave_type.name %></td>
+        <td><%= leave_request.leave_type_id? ? leave_request.leave_type.name : '' %></td>
         <td><%= leave_request.start_date.to_s(:short_date) %></td>
         <td><%= leave_request.end_date.to_s(:short_date) %></td>
         <td><%= class_for_status(leave_request.status) %><%= leave_request.status.capitalize %></td>
-        <td><%= leave_request.approval_user.nil? ? '' : leave_request.approval_user.name %></td>
+        <td><%= leave_request.approved_by_id? ? leave_request.approval_user.name : '' %></td>
         <td><%= leave_request.nb_hours %></td>
         <td><%= leave_request.description %></td>
         <td class='action'><%= link_to '', user_leave_request_path(leave_request.user, leave_request), class: 'fi-eye', title: 'Info' %></td>

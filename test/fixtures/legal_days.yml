@@ -4,10 +4,10 @@ one:
   year: 2016
   start_date: 2016-01-01
   name: MyString
-  site: sites(:one)
+  site_id: sites(:one).id
 
 two:
   year: 2016
   start_date: 2016-12-25
   name: MyString2
-  site: sites(:one)
+  site_id: sites(:one).id

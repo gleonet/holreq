@@ -25,8 +25,8 @@
         <td><%= user.email %></td>
         <td><%= user.external_id %></td>
         <td><%= user.role.to_s.capitalize %></td>
-        <td><%= user.site.nil? ? '' : user.site.name %></td>
-        <td><%= user.team.nil? ? '' : user.team.name.to_s + ' (' + user.team.manager.name + ')' %></td>
+        <td><%= user.site_id? ? user.site.name : '' %></td>
+        <td><%= user.team_id? ? user.team.name.to_s + ' (' + user.team.manager.name + ')' : '' %></td>
         <td class='action'><%= link_to '', user, class: 'fi-info', title: 'Info' %></td>
         <td class='action'><%= link_to '', edit_user_path(user), class: 'fi-pencil', title: 'Edit' %></td>
         <% if user.login != 'admin' -%>

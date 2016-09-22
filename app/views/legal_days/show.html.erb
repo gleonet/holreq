@@ -4,11 +4,11 @@
   <dt>Year:</dt>
   <dd><%= @legal_day.year %></dd>
   <dt>Date:</dt>
-  <dd><%= @legal_day.start_date.nil? ? '' : @legal_day.start_date.to_s(:short_date) %></dd>
+  <dd><%= @legal_day.start_date? ? @legal_day.start_date.to_s(:short_date) : '' %></dd>
   <dt>Name:</dt>
   <dd><%= @legal_day.name %></dd>
   <dt>Site:</dt>
-  <dd><%= @legal_day.site.nil? ? '' : @legal_day.site.name %></dd>
+  <dd><%= @legal_day.site_id? ? @legal_day.site.name : '' %></dd>
 </dl>
 
 <div class='small button-group'>

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: users(:one)
+  user_id: users(:one).id
   year: 2016
-  leave_type: leave_types(:one)
+  leave_type_id: leave_types(:one).id
   nb_hours: 40
 
 two:
-  user: users(:one)
+  user_id: users(:one).id
   year: 2016
-  leave_type: leave_types(:two)
+  leave_type_id: leave_types(:two).id
   nb_hours: 50

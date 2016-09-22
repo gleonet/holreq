@@ -17,8 +17,8 @@
       <td><%= @user.login %></td>
       <td><%= @user.email %></td>
       <td><%= @user.external_id %></td>
-      <td><%= @user.site.nil? ? '' : @user.site.name %></td>
-      <td><%= @user.team.nil? ? '' : @user.team.name %></td>
+      <td><%= @user.site_id? ? @user.site.name : '' %></td>
+      <td><%= @user.team_id? ? @user.team.name : '' %></td>
     </tr>
   </tbody>
 </table>

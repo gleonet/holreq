@@ -28,7 +28,7 @@ class LeaveRequest < ApplicationRecord
   end
 
   def type_name
-    self.leave_type.nil? ? '' : self.leave_type.name
+    self.leave_type_id? ? '' : self.leave_type.name
   end
 
   # FIXME - Has to use the rules table

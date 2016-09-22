@@ -93,6 +93,7 @@ class UsersController < ApplicationController
         session[:authentified] = true
         session[:last_updated_at] = Time::now
         session[:user_id] = @user.id
+        @session_user = @user
         format.html { redirect_to user_path(@user) }
       else
         @user = User.new

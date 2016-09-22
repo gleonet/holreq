@@ -14,9 +14,9 @@
   <tbody>
     <% @leaves.each do |leave| %>
       <tr>
-        <td><%= leave.user.nil? ? '' : leave.user.name %></td>
+        <td><%= leave.user_id? ? leave.user.name : '' %></td>
         <td><%= leave.year %></td>
-        <td><%= leave.leave_type.nil? ? '' : leave.leave_type.name %></td>
+        <td><%= leave.leave_type_id? ? leave.leave_type.name : '' %></td>
         <td><%= leave.nb_hours %></td>
         <td class='action'><%= link_to '', leave, class: 'fi-eye', title: 'Info' %></td>
         <td class='action'><%= link_to '', edit_leave_path(leave), class: 'fi-pencil', title: 'Edit' %></td>

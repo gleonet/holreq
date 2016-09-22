@@ -12,7 +12,7 @@
       <% if !@user.nil? -%>
         <% @user.leaves.each do |leave| -%>
           <tr>
-            <td><%= leave.leave_type.nil? ? '' : leave.leave_type.name %></td>
+            <td><%= leave.leave_type_id? ? leave.leave_type.name : '' %></td>
             <td><%= leave.available %></td>
             <td><%= leave.nb_hours %></td>
           <% end -%>

@@ -1,4 +1,5 @@
 class LeaveRequestsController < ApplicationController
+  before_action :set_user
   before_action :set_leave_request, only: [:show, :edit, :update, :destroy]
 
   # GET /leave_requests
@@ -14,17 +15,14 @@ class LeaveRequestsController < ApplicationController
 
   # GET /leave_requests/new
   def new
-    redirect_to user_path(@session_user) if params[:user_id].nil?
     @leave_request = LeaveRequest.new
-    @leave_request.user_id = params[:user_id]
-    @user = @leave_request.user
+    @leave_request.user_id = @user.id
   end
 
   # GET /leave_requests/1/edit
   def edit
-    @user = @leave_request.user
     if @leave_request.start_date < Time::now and !@session_user.hr?
-      redirect_to user_path(@leave_request.user || @session_user, notice: 'You cannot edit a request in the past')
+      redirect_to user_path(@user || @session_user, notice: 'You cannot edit a request in the past')
     end
   end
 
@@ -32,8 +30,7 @@ class LeaveRequestsController < ApplicationController
   # POST /leave_requests.json
   def create
     @leave_request = LeaveRequest.new(leave_request_params)
-    @user = @leave_request.user
-    @leave = Leave.where("user_id = ? and leave_type_id = ?", leave_request_params[:user_id], leave_request_params[:leave_type_id]).first
+    @leave = @user.leaves.where("leave_type_id = ?", leave_request_params[:leave_type_id]).first
     @leave_request.leave_id = @leave.id if !@leave.nil?
 
     if leave_request_params[:range] == 'single_date'
@@ -44,7 +41,7 @@ class LeaveRequestsController < ApplicationController
 
     respond_to do |format|
       if @leave_request.save
-        format.html { redirect_to @leave_request.user, notice: 'Leave request was successfully created.' }
+        format.html { redirect_to @user, notice: 'Leave request was successfully created.' }
         format.json { render :show, status: :created, location: @leave_request }
       else
         format.html { render :new }
@@ -56,8 +53,8 @@ class LeaveRequestsController < ApplicationController
   # PATCH/PUT /leave_requests/1
   # PATCH/PUT /leave_requests/1.json
   def update
-    @leave = Leave.where("user_id = ? and leave_type_id = ?", leave_request_params[:user_id], leave_request_params[:leave_type_id]).first
-    @leave_request.user_id = leave_request_params[:user_id]
+    @leave = @user.leaves.where("leave_type_id = ?", leave_request_params[:leave_type_id]).first
+    @leave_request.user_id = @user.id
     @leave_request.nb_hours = @leave_request.compute_nb_hours
     respond_to do |format|
       if @leave.nil? or @leave_request.nb_hours > @leave.available
@@ -68,7 +65,7 @@ class LeaveRequestsController < ApplicationController
       else
         @leave_request.status == LeaveRequest::SUBMITTED if @leave_request.status == LeaveRequest::APPROVED
         if @leave_request.update(leave_request_params)
-          format.html { redirect_to @leave_request, notice: 'Leave request was successfully updated.' }
+          format.html { redirect_to user_leave_request_path(@user, @leave_request), notice: 'Leave request was successfully updated.' }
           format.json { render :show, status: :ok, location: @leave_request }
         else
           format.html { render :edit }
@@ -81,7 +78,6 @@ class LeaveRequestsController < ApplicationController
   # DELETE /leave_requests/1
   # DELETE /leave_requests/1.json
   def destroy
-    @user = @leave_request.user
     if @leave_request.start_date > Time::now or @session_user.hr?
       @leave_request.destroy
       notice = 'Leave request was successfully deleted.'
@@ -97,6 +93,10 @@ class LeaveRequestsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
   def set_leave_request
     @leave_request = LeaveRequest.find(params[:id])
   end

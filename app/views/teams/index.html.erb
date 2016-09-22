@@ -14,7 +14,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><%= team.manager.nil? ? '' : team.manager.name %></td>
+        <td><%= team.manager_id? ? team.manager.name : '' %></td>
         <td><%= team.external_id %></td>
         <% if team.name != 'admin' -%>
           <td class="action"><%= link_to '', team, class: 'fi-eye', title: 'Info' %></td>

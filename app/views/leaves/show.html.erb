@@ -2,9 +2,9 @@
 
 <dl>
   <dt>Leave type:</dt>
-  <dd><%= @leave.leave_type.nil? ? '' : @leave.leave_type.name %></dd>
+  <dd><%= @leave.leave_type_id? ? @leave.leave_type.name : '' %></dd>
   <dt>User:</dt>
-  <dd><%= @leave.user.nil? ? '' : @leave.user.name %></dd>
+  <dd><%= @leave.user_id? ? @leave.user.name : '' %></dd>
   <dt>Year:</dt>
   <dd><%= @leave.year %></dd>
   <dt>Nb hours:</dt>

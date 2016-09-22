@@ -1,0 +1,18 @@
+<legend>My Calendar</legend>
+
+<%= month_calendar events: @leave_requests do |date, leave_requests| %>
+  <%= date %>
+
+  <% leave_requests.each do |leave_request| -%>
+    <div class='event'>
+      <%= leave_request.name %>&nbsp;
+      <% if leave_request.approved? -%>
+        <i class='fi-check' title='approved'></i>
+      <% elsif leave_request.rejected? -%>
+        <i class='fi-x' title='rejected'></i>
+      <% else -%>
+        <i title='submitted'>?</i>
+      <% end -%> 
+    </div>
+  <% end -%>
+<% end -%>

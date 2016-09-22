@@ -34,13 +34,21 @@
   <% end -%>
 </div>
 
-<%= render partial: 'leave_requests/list' %>
+<!-- List of Leave requests -->
+<%= render partial: 'leave_requests/list', leave_requests: @leave_requests %>
 
 <div class="button-group small">
-  <%= link_to new_leave_request_path(user_id: @user.id), class: 'button' do -%>
+  <%= link_to new_user_leave_request_path(@user), class: 'button' do -%>
     <i class='fi-plus'></i> Create a Request
   <% end -%>
 </div>
+
+<!-- If manager display the requests waiting for approval -->
+<% if @session_user.manager? and !@team.nil? -%>
+  <% content_for :other_info do -%>
+    <%= render partial: 'leave_requests/list', leave_requests: @team_leave_requests %>
+  <% end -%>
+<% end -%>
 
 <!-- extra-content -->
 <% content_for :title do -%>

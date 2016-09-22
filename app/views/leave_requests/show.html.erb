@@ -21,8 +21,11 @@
 
 <% if @session_user.hr? or @leave_request.start_date > Time::now -%>
   <div class='button-group small'>
-    <%= link_to edit_leave_request_path(@leave_request), class: 'button secondary' do %>
+    <%= link_to edit_user_leave_request_path(@leave_request.user, @leave_request), class: 'button secondary' do %>
       <i class='fi-pencil'></i> Edit
+    <% end -%>
+    <%= link_to user_path(@leave_request.user), class: 'button secondary' do %>
+      <i class='fi-arrow-left'></i> Back
     <% end -%>
   </div>
 <% end -%>

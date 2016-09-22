@@ -14,6 +14,7 @@ class LeaveRequestsController < ApplicationController
 
   # GET /leave_requests/new
   def new
+    redirect_to user_path(@session_user) if params[:user_id].nil?
     @leave_request = LeaveRequest.new
     @leave_request.user_id = params[:user_id]
     @user = @leave_request.user
@@ -21,6 +22,7 @@ class LeaveRequestsController < ApplicationController
 
   # GET /leave_requests/1/edit
   def edit
+    @user = @leave_request.user
     if @leave_request.start_date < Time::now and !@session_user.hr?
       redirect_to user_path(@leave_request.user || @session_user, notice: 'You cannot edit a request in the past')
     end

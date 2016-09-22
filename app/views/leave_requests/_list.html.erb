@@ -22,10 +22,10 @@
         <td><%= leave_request.approval_user.nil? ? '' : leave_request.approval_user.name %></td>
         <td><%= leave_request.nb_hours %></td>
         <td><%= leave_request.description %></td>
-        <td class='action'><%= link_to '', leave_request, class: 'fi-eye', title: 'Info' %></td>
+        <td class='action'><%= link_to '', user_leave_request_path(leave_request.user, leave_request), class: 'fi-eye', title: 'Info' %></td>
         <% if leave_request.start_date > Time::now or @session_user.hr? %>
-          <td class='action'><%= link_to '', edit_leave_request_path(leave_request), class: 'fi-pencil', title: 'Edit' %></td>
-          <td class='action'><%= link_to '', leave_request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete' %></td>
+          <td class='action'><%= link_to '', edit_user_leave_request_path(leave_request.user, leave_request), class: 'fi-pencil', title: 'Edit' %></td>
+          <td class='action'><%= link_to '', user_leave_request_path(leave_request.user, leave_request), method: :delete, data: { confirm: 'Are you sure?' }, class: 'fi-trash', title: 'Delete' %></td>
         <% else %>
           <td class='action' colspan='2'></td>
         <% end %>

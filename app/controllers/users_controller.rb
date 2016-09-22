@@ -12,6 +12,16 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @leave_requests = @user.leave_requests.order(:start_date)
+    if @session_user.manager?
+      @team = Team.where("manager_id = ?", @session_user.id).first
+      @team_leave_requests = []
+      if !@team.nil?
+        @team.users.where("id != ?", @session_user.id).each do |user|
+          @team_leave_requests << user.leave_requests.where("status = ?", LeaveRequest::SUBMITTED).order(:start_date)
+        end
+        @team_leave_requests.flatten!
+      end
+    end
   end
 
   # GET /users/new
@@ -106,6 +116,9 @@ class UsersController < ApplicationController
       leave_request.dates.each do |date|
         @leave_requests << LeaveRequest::LeaveDate.new(date, leave_request.type_name, leave_request.status)
       end
+    end
+    LegalDay.order(:start_date).each do |date|
+      @leave_requests << LeaveRequest::LeaveDate.new(date.start_date, 'BH', LeaveRequest::APPROVED)
     end
   end
 

@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :calendar]
 
   # GET /teams
   # GET /teams.json
@@ -63,7 +63,17 @@ class TeamsController < ApplicationController
 
   # GET /teams/calendar
   def calendar
-    @users = @team.users.includes(:leave_requests).order(:name)
+    @leave_requests = []
+    @team.users.includes(:leave_requests).order(:firstname).each do |user|
+      user.leave_requests.where("status != ?", LeaveRequest::REJECTED).order(:start_date).each do |leave_request|
+        leave_request.dates.each do |date|
+          @leave_requests << LeaveRequest::LeaveDate.new(date, user.name, leave_request.status)
+        end
+      end
+    end
+    LegalDay.order(:start_date).each do |date|
+      @leave_requests << LeaveRequest::LeaveDate.new(date.start_date, 'BH', LeaveRequest::APPROVED)
+    end
   end
 
   private

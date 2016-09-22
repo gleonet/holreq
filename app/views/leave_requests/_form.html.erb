@@ -1,4 +1,4 @@
-<%= form_for(leave_request) do |f| %>
+<%= form_for [ @user, leave_request ] do |f| %>
   <% if leave_request.errors.any? %>
     <div class='callout alert'>
       <h5><%= pluralize(leave_request.errors.count, "error") %> prohibited this leave_request from being saved:</h5>

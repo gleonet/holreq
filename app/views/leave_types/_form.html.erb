@@ -3,9 +3,9 @@
     <div class="callout alert">
       <h5><%= pluralize(leave_type.errors.count, "error") %> prohibited this leave_type from being saved:</h5>
       <ul>
-      <% leave_type.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% leave_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -21,9 +21,7 @@
   </div>
 
   <div class="button-group small">
-    <%= f.submit class: 'button primary' do -%>
-      <i class='fi-save'></i> Save
-    <% end -%>
+    <%= f.submit class: 'button' %>
     <% if !leave_type.new_record? -%>
       <%= link_to leave_type_path(leave_type), class: 'secondary button' do -%>
         <i class='fi-eye'></i> Show

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :leave_requests
   resources :leaves
   resources :leave_types
   resources :teams do
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
     member do
       get :calendar
     end
+    resources :leave_requests
   end
   match 'login' => 'users#login', via: :get, as: :login
   match 'logout' => 'users#logout', via: :get, as: :logout

@@ -35,7 +35,8 @@
 </div>
 
 <!-- List of Leave requests -->
-<%= render partial: 'leave_requests/list', leave_requests: @leave_requests %>
+<h5>My Requests</h5>
+<%= render partial: 'leave_requests/list', locals: { leave_requests: @leave_requests } %>
 
 <div class="button-group small">
   <%= link_to new_user_leave_request_path(@user), class: 'button' do -%>
@@ -46,7 +47,8 @@
 <!-- If manager display the requests waiting for approval -->
 <% if @session_user.manager? and !@team.nil? -%>
   <% content_for :other_info do -%>
-    <%= render partial: 'leave_requests/list', leave_requests: @team_leave_requests %>
+    <legend>Requests waiting to be approved</legend>
+    <%= render partial: 'leave_requests/list', locals: { leave_requests: @team_leave_requests } %>
   <% end -%>
 <% end -%>
 

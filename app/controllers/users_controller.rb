@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :calendar]
-  before_action :check_role, except: [:login, :logout, :signin]
+  before_action :check_role, except: [:login, :logout, :signin, :show, :edit, :update, :calendar]
 
   # GET /users
   # GET /users.json
@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    if @user.id != @session_user.id and !@session_user.hr?
+      flash[:alert] = "You don't have access to this page"
+      redirect_to user_path(@session_user) 
+    end
     @leave_requests = @user.leave_requests.order(:start_date)
     if @session_user.manager?
       @team = Team.where("manager_id = ?", @session_user.id).first

@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_role
-    if !@session_user.admin? and !@session_user.hr?
-      flash[:alert] = "You don't have the permission to access this section"
-      redirect_to user_path(@session_user)
+    if !@session_user.hr?
+      flash[:alert] = "You don't have the permission to access to this section"
+      redirect_to logout_url
     end
   end
 

@@ -40,16 +40,18 @@
                   <% end -%>
                 </li>
               <% end -%>
-              <li>
-                <a href="#"><i class='fi-widget'></i> Admin</a>
-                <ul id="submenu" class="dropdown menu" data-dropdown-menu>
-                  <li><%= link_to 'Sites', sites_url %></li>
-                  <li><%= link_to 'Users', users_url %></li>
-                  <li><%= link_to 'Teams', teams_url %></li>
-                  <li><%= link_to 'Leave Types', leave_types_url %></li>
-                  <li><%= link_to 'Bank Holiday', legal_days_url %></li>
-                </ul>
-              </li>
+              <% if @session_user.hr? -%>
+                <li>
+                  <a href="#"><i class='fi-widget'></i> Admin</a>
+                  <ul id="submenu" class="dropdown menu" data-dropdown-menu>
+                    <li><%= link_to 'Sites', sites_url %></li>
+                    <li><%= link_to 'Users', users_url %></li>
+                    <li><%= link_to 'Teams', teams_url %></li>
+                    <li><%= link_to 'Leave Types', leave_types_url %></li>
+                    <li><%= link_to 'Bank Holiday', legal_days_url %></li>
+                  </ul>
+                </li>
+              <% end -%>
             </ul>
           <% end -%>
         </div>
@@ -83,11 +85,13 @@
           <%= yield(:right) %>
         </div>
         <% if content_for?(:other_info) -%>
-          <div class='large-9 columns'>
-            <fieldset class='fieldset'>
-              <%= yield(:other_info) %>
-            </fieldset>
           </div>
+          <div class='expanded row'>
+            <div class='large-9 columns'>
+              <fieldset class='fieldset'>
+                <%= yield(:other_info) %>
+              </fieldset>
+            </div>
         <% end -%>
       <% elsif content_for?(:equal_right) -%>
         <div class='large-6 columns'>
@@ -99,11 +103,13 @@
           <%= yield(:equal_right) %>
         </div>
         <% if content_for?(:other_info) -%>
-          <div class='large-9 columns'>
-            <fieldset class='fieldset'>
-              <%= yield(:other_info) %>
-            </fieldset>
           </div>
+          <div class='expanded row'>
+            <div class='large-9 columns'>
+              <fieldset class='fieldset'>
+                <%= yield(:other_info) %>
+              </fieldset>
+            </div>
         <% end -%>
       <% else -%>
         <div class='large-12 columns'>
@@ -112,11 +118,13 @@
           </fieldset>
         </div>
         <% if content_for?(:other_info) -%>
-          <div class='large-9 columns'>
-            <fieldset class='fieldset'>
-              <%= yield(:other_info) %>
-            </fieldset>
           </div>
+          <div class='expanded row'>
+            <div class='large-9 columns'>
+              <fieldset class='fieldset'>
+                <%= yield(:other_info) %>
+              </fieldset>
+            </div>
         <% end -%>
       <% end -%>
     </div>
